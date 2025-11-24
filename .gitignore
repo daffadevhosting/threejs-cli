@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+package-lock.json
+yarn.lock
+
+# Optional: if you generate reports or coverage
+coverage/
+.nyc_output/
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.eslintcache
+
+# Local configuration files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Generated project files
+# The CLI generates projects in the parent directory, but
+# any generated test projects inside cli/ could go here.
+/temp_projects/

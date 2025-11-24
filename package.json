@@ -1,0 +1,31 @@
+{
+  "name": "threejs-ai-cli",
+  "version": "1.2.0",
+  "description": "CLI for generating Three.js projects using AI",
+  "main": "dist/index.js",
+  "bin": {
+    "threejs-ai": "dist/index.js",
+    "three": "dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild bin/client.js --bundle --platform=node --outfile=dist/index.js --format=esm --banner:js='#!/usr/bin/env node' --external:axios --external:chalk",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "three.js",
+    "ai",
+    "cli",
+    "generator"
+  ],
+  "author": "Daffa A",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.0"
+  }
+}
