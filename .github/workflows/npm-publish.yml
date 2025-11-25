@@ -1,0 +1,55 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*' ]
+  release:
+    types: [ published ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GH_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        registry-url: 'https://registry.npmjs.org/'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm test -- --passWithNoTests
+
+    - name: Build package
+      run: npm run build
+
+    - name: Conditional version bump and publish
+      run: |
+        if [[ ${{ github.ref }} == refs/tags/* ]]; then
+          echo "Tag push - langsung publish tanpa bump version"
+          npm publish --access public
+        else
+          echo "Regular push - bump version dan publish"
+          npm version patch -m "ci: bump version to %s [skip ci]"
+          npm publish --access public
+        fi
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Push version changes
+      if: startsWith(github.ref, 'refs/heads/')
+      run: git push origin master --follow-tags
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
