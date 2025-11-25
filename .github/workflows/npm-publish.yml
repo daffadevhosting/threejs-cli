@@ -10,8 +10,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    
     permissions:
-      contents: write
+      contents: write 
 
     steps:
     - name: Checkout code
@@ -29,11 +30,38 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Run tests
+    - name: Run tests (fixed)
       run: npm test -- --passWithNoTests
 
     - name: Build package
       run: npm run build
+
+    - name: Conditional version bump and publish
+      run: |
+        if [[ ${{ github.ref }} == refs/heads/master ]]; then
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@github.com'
+        fi
+
+        if [[ ${{ github.ref }} == refs/tags/* ]]; then
+          echo "Tag push/Release detected: Publishing without version bump."
+          npm publish --access public
+        elif [[ ${{ github.ref }} == refs/heads/master ]]; then
+          echo "Master branch push detected: Bumping version and publishing."
+          
+          npm version patch -m "ci: bump version to %s [skip ci]" 
+          npm publish --access public
+        else
+          echo "Not master or a tag. Skipping publish."
+        fi
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Push version changes
+      if: github.ref == 'refs/heads/master'
+      run: git push origin master --follow-tags
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
     - name: Conditional version bump and publish
       
