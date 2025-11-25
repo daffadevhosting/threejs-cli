@@ -1,4 +1,4 @@
-name: Publish to NPM
+Name: Publish to NPM
 
 on:
   push:
@@ -36,12 +36,17 @@ jobs:
       run: npm run build
 
     - name: Conditional version bump and publish
-      run: |
+      
+      run: |  
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
         if [[ ${{ github.ref }} == refs/tags/* ]]; then
           echo "Tag push - langsung publish tanpa bump version"
           npm publish --access public
         else
           echo "Regular push - bump version dan publish"
+          
           npm version patch -m "ci: bump version to %s [skip ci]"
           npm publish --access public
         fi
