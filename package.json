@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "esbuild bin/client.js --bundle --platform=node --outfile=dist/index.js --format=esm --banner:js='#!/usr/bin/env node' --external:axios --external:chalk",
     "prepublishOnly": "npm run build"
   },
