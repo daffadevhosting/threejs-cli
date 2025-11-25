@@ -1,6 +1,9 @@
 # Three.js AI CLI Generator
 
-## unreleased
+## released
+[![npm version](https://img.shields.io/npm/v/threejs-ai-cli)](https://www.npmjs.com/package/threejs-ai-cli.svg) 
+[![NPM Weekly Downloads](https://img.shields.io/npm/dw/threejs-ai-cli.svg)](https://www.npmjs.com/package/threejs-ai-cli)
+
 
 A powerful command-line interface to generate full Three.js projects using an AI. Describe your project in plain English and get a ready-to-use, professional-grade Three.js boilerplate.
 
