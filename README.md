@@ -4,7 +4,7 @@
 
 A powerful command-line interface to generate full Three.js projects using an AI. Describe your project in plain English and get a ready-to-use, professional-grade Three.js boilerplate.
 
-![threjs](three.png)
+![threjs](/three.png)
 
 ## Features
 
