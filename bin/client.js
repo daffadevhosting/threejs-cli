@@ -69,7 +69,7 @@ class ConfigManager {
 
 // --- API Client ---
 class ThreeJSAPI {
-  constructor(apiKey, userId, baseURL = 'https://threejs-ai-backend.workers.dev') {
+  constructor(apiKey, userId, baseURL = 'https://threejs-ai-backend.harisudahmalam.workers.dev') {
     this.baseURL = baseURL;
     this.apiKey = apiKey;
     this.userId = userId;
