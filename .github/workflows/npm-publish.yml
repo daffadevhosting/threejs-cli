@@ -62,27 +62,3 @@ jobs:
       run: git push origin master --follow-tags
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-    - name: Conditional version bump and publish
-      
-      run: |  
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-        if [[ ${{ github.ref }} == refs/tags/* ]]; then
-          echo "Tag push - langsung publish tanpa bump version"
-          npm publish --access public
-        else
-          echo "Regular push - bump version dan publish"
-          
-          npm version patch -m "ci: bump version to %s [skip ci]"
-          npm publish --access public
-        fi
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-    - name: Push version changes
-      if: startsWith(github.ref, 'refs/heads/')
-      run: git push origin master --follow-tags
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
