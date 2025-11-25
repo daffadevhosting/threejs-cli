@@ -1,6 +1,6 @@
 {
   "name": "threejs-ai-cli",
-  "version": "1.2.27",
+  "version": "1.2.28",
   "description": "CLI for generating Three.js projects using AI",
   "main": "dist/index.js",
   "bin": {
