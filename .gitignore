@@ -13,8 +13,6 @@ yarn-error.log*
 # OS-specific files
 .DS_Store
 Thumbs.db
-package-lock.json
-yarn.lock
 
 # Optional: if you generate reports or coverage
 coverage/
