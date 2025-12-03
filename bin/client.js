@@ -428,13 +428,13 @@ const commands = {
         });
       } else {
         // Fallback to online pricing page
-        log(chalk.yellow('Please visit: https://threejs-ai-frontend.pages.dev/pricing'));
-        log(chalk.dim('(This is the default frontend, you can customize it based on your deployment)'));
+        log(chalk.yellow('Please visit: https://threejs-cli-ai.pages.dev'));
+        log(chalk.dim('(This is the default frontend, you can purchase some tokens)'));
       }
     } catch (error) {
       // If anything fails, just show the URL
-      log(chalk.yellow('Please visit: https://threejs-ai-frontend.pages.dev/pricing'));
-      log(chalk.dim('(This is the default frontend, you can customize it based on your deployment)'));
+      log(chalk.yellow('Please visit: https://threejs-cli-ai.pages.dev'));
+      log(chalk.dim('(This is the default frontend, you can purchase some tokens)'));
     }
   },
 
