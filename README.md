@@ -44,7 +44,7 @@ three <command> [options]
 ### Core Commands
 
 **`register`**
-Register a new user account.
+Register a new user account and get free 2000 tokens for new user.
 
 - **Usage**: `three register --email <your-email> --username <your-username>`
 - **Example**: `three register --email user@example.com --username testuser`
