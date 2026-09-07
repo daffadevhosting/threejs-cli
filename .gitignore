@@ -36,3 +36,4 @@ coverage/
 # The CLI generates projects in the parent directory, but
 # any generated test projects inside cli/ could go here.
 /temp_projects/
+package-lock.json
