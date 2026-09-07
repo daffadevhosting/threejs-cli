@@ -1,6 +1,6 @@
 import { createRequire } from 'module';
 import { commands } from './lib/commands.js';
-import { log, logError, chalk } from './lib/utils.js';
+import { log, logError, chalk, notifyIfUpdateAvailable } from './lib/utils.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json');
@@ -12,6 +12,10 @@ async function main() {
     if (command === '-v' || command === '--version' || command === 'version') {
       log(pkg.version);
       return;
+    }
+
+    if (command && !['help'].includes(command)) {
+      await notifyIfUpdateAvailable(pkg.version);
     }
 
     // Normalize hyphenated commands (e.g. create-key -> createKey)

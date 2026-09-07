@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
     "build": "esbuild bin/client.js --bundle --platform=node --outfile=dist/index.js --format=esm --banner:js='#!/usr/bin/env node' --external:axios --external:chalk",
     "prepublishOnly": "npm run build"
   },
