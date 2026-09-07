@@ -55,16 +55,17 @@ jobs:
             echo "Tag push / Release detected: publishing without version bump."
             npm publish --access public --provenance
           elif [[ "${{ github.ref }}" == refs/heads/master ]]; then
-            echo "Master branch push detected: bumping version and publishing."
-
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-            # Skip if the latest commit is already a version bump
-            if git log -1 --pretty=%B | grep -q '\[skip ci\]'; then
-              echo "Latest commit already has [skip ci]. Skipping version bump."
-            else
+            echo "Master branch push detected."
+            
+            # Check if package exists in registry
+            if npm view threejs-ai-cli@latest 2>/dev/null; then
+              echo "Package exists: bumping version and publishing."
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
               npm version patch -m "ci: bump version to %s [skip ci]"
+              npm publish --access public --provenance
+            else
+              echo "First publish: publishing current version without bump."
               npm publish --access public --provenance
             fi
           else
