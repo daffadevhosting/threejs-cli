@@ -45,6 +45,17 @@ jobs:
           test -f dist/index.js || (echo "Build failed: dist/index.js missing" && exit 1)
           head -1 dist/index.js | grep -q '#!/usr/bin/env node' || echo "Warning: shebang missing"
 
+      - name: Debug npm auth
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "Checking npm authentication..."
+          npm whoami || true
+          npm config get registry
+          echo "Token present: ${NODE_AUTH_TOKEN:+yes}"
+          echo "Token length: ${#NODE_AUTH_TOKEN}"
+          npm ping || true
+
       - name: Conditional version bump and publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
